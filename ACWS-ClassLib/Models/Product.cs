@@ -1,0 +1,13 @@
+using System.Collections.Generic;
+namespace ACWS_ClassLib.Models
+{
+    public class Product
+    {
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        public string ProductDescription { get; set; }
+        public int AvailableQuantity { get; set; }
+
+        public ICollection<Prize> Prizes { get; set; }
+    }
+}
