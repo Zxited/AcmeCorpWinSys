@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.Reflection.Emit;
-namespace ACWS_ClassLib.Models
+
+namespace ACWS_Data.Models
 {
     public class SerialNumber
     {

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ACWS_WebApp.Data.Migrations
+namespace ACWS_Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

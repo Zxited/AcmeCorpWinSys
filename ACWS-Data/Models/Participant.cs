@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-namespace ACWS_ClassLib.Models
+
+namespace ACWS_Data.Models
 {
     public class Participant
     {
