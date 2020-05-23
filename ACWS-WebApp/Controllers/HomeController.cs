@@ -23,10 +23,25 @@ namespace ACWS_WebApp.Controllers
             return View();
         }
 
+        public IActionResult Check()
+        {
+            return View();
+        }
+
+        public IActionResult Redeem()
+        {
+            return View();
+        }
+
         [Route("/login")]
         public IActionResult Login()
         {
             return Redirect("Identity/Account/Login");
+        }
+
+        public IActionResult Tos()
+        {
+            return View();
         }
 
         public IActionResult Privacy()

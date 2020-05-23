@@ -4,11 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Acme Corporation</title>
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body class="bg-dark-custom bg-star">
+<body class="bg-dark-custom bg-star text-outline">
     <header>
         <nav class="navbar mb-3">
             <div class="container">
@@ -22,10 +23,10 @@
                     <!--<partial name="_LoginPartial" />-->
                     <ul class="navbar-nav flex-grow-1 flex-row">
                         <li class="nav-item mr-3">
-                            <a class="nav-link text-light-custom" asp-area="" asp-controller="Home" asp-action="Index">Check my entries</a>
+                            <a class="nav-link text-light-custom" asp-area="" asp-controller="Home" asp-action="Check">Check my entries</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="Index">Redeem Code</a>
+                            <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="Redeem">Redeem Code</a>
                         </li>
                     </ul>
                 </div>
@@ -40,7 +41,7 @@
 
     <footer class="footer pb-2">
         <div class="container">
-            &copy; 2020 - Acme Corporation - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - Acme Corporation - <a asp-area="" asp-controller="Home" asp-action="Tos">Terms of Service</a> - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

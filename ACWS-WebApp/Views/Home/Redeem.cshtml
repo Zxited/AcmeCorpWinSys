@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Redeem Code";
+}
+<p class="h1">@ViewData["Title"]</p>
+
+<div class="row">
+    <div class="col">
+        <form method="post">
+            <p class="h4">Redeem a Serial Number.</p>
+            <p>How it works:<br>
+            - Each serial number gives you 2 entries(<img class="ent-icon" src="../img/coin-icon-selfmade.png">).<br>
+            - You can redeem multiple serial numbers on the same email.<br>
+            - You use your entries by participating in prize draws.<br>
+            - You must be at least <u>18 years old</u> to participate.</p>
+            <hr />
+
+            <div class="text-danger"></div>
+
+            <div class="form-group">
+                <label for="serial_number">Serial Number</label>
+                <input id="serial_number" pattern="[a-zA-Z0-9]+" minlength="8" maxlength="8" autocomplete="off" type="text" placeholder="A1B2C3D4" class="form-control" required />
+                <span id="snErrorMsg" style="visibility: hidden;" class="text-danger">Serial Number must only contain letters and numbers.</span>
+            </div>
+
+            <div class="form-group">
+                <label for="fname">First name</label>
+                <input id="fname" name="fname" maxlength="64" autocomplete="given-name" type="text" placeholder="John" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="lname">Last name</label>
+                <input id="lname" name="lname" maxlength="64" autocomplete="family-name" type="text" placeholder="Doe" class="form-control" required />
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" name="email" autocomplete="email" type="email" placeholder="example@example.example" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input id="dob" name="dob" autocomplete="bday" type="date" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <input id="tos_pp" name="tos_pp" type="checkbox" required />
+                <label for="tos_pp">I accept the <u><a class="text-white" asp-area="" asp-controller="Home" asp-action="Tos">Terms of Service</a></u> and <u><a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a></u>.</label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+</div>

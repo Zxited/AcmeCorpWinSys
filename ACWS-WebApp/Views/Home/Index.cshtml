@@ -9,14 +9,14 @@
 <div class="text-center">
     <h1 class="h1">Welcome to<br>Winner Days!</h1>
     <p>Every serialnumber gives you 2 entries!<br>Please choose which draws you would like to enter below.</p>
-    <p>Entries left: 2 x <img src="../img/ent-icon.svg" height="16px"></p>
+    <p>Entries left: 2 x <img class="ent-icon" src="../img/coin-icon-selfmade.png"></p>
 </div>
 
 <div class="prize-pools-section">
     @for (int i = 0; i < 10; i++)
     {
-        <div class="m-3 prize-pool">
-            <p class="display-8 text-center">PRIZE #@(i+1)</p>
+        <div class="prize-pool">
+            <p class="text-center">PRIZE #@(i+1)</p>
             <div class="prize-image"></div>
             <p class="text-small">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
             <div>
@@ -25,7 +25,7 @@
                     <p class="text-small">1 x PRODUCT #@(j+1)</p>
                 }
             </div>
-            <button class="btn btn-primary w-100">1 x <img src="../img/ent-icon.svg" class="ent-icon"></button>
+            <button class="btn btn-primary w-100">1 x <img src="../img/coin-icon-selfmade.png" class="ent-icon"></button>
         </div>
     }
 </div>
