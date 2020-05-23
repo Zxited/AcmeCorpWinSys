@@ -32,7 +32,7 @@ namespace ACWS_WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> MakeSubmission(Submission submission)
+        public async Task<IActionResult> MakeSubmission([Bind("FirstName,LastName,Email,DateOfBirth,ToSPP")]Participant participant)
         {
             try
             {

@@ -6,16 +6,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ACWS_WebApp.Models;
+using ACWS_Data.Models;
+using ACWS_Services.ServiceInterfaces;
 
 namespace ACWS_WebApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IParticipantService _participantService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(
+            ILogger<HomeController> logger,
+            IParticipantService participantService)
         {
             _logger = logger;
+            _participantService = participantService;
+        }
+
+        public Participant GetParticipant(string serialNumber, string email)
+        {
+            return new Participant();
         }
 
         public IActionResult Index()

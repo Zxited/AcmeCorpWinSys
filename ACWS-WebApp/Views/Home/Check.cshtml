@@ -1,11 +1,14 @@
-﻿@{
+﻿@using ACWS_Data.Models
+@model Participant
+
+@{
     ViewData["Title"] = "Check Entries";
 }
 <h1>@ViewData["Title"]</h1>
 
 <div class="row">
     <div class="col">
-        <form method="post">
+        <form asp-action="GetParticipant" method="post">
             <p class="h4">Check your entries.</p>
             <hr />
 
@@ -13,12 +16,14 @@
 
             <div class="form-group">
                 <label for="serial_number">Serial Number</label>
-                <input id="serial_number" maxlength="8" autocomplete="on" type="text" placeholder="A1B2C3D4" class="form-control" required />
+                <input id="serial_number" pattern="[a-zA-Z0-9]+" minlength="8" maxlength="8" autocomplete="off" oninput="checkSerialNumber();" style="text-transform: uppercase;" type="text" placeholder="A1B2C3D4" class="form-control" required />
+                <span id="snErrorMsg" style="visibility: hidden;" class="text-danger">Serial Number must only contain letters and numbers.</span>
             </div>
             
             <div class="form-group">
                 <label for="email">Email</label>
-                <input id="email" autocomplete="email" type="email" placeholder="example@example.example" class="form-control" required />
+                <input id="email" name="email" autocomplete="email" type="email" placeholder="example@example.example" class="form-control" required />
+                <span id="emailErrorMsg" style="visibility: hidden;" class="text-danger">Email must be valid.</span>
             </div>
 
             <button type="submit" class="btn btn-primary">Register</button>

@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 
 namespace ACWS_Data.Models
@@ -6,6 +7,9 @@ namespace ACWS_Data.Models
     {
         public int SerialNumberID { get; set; }
         public int ParticipantID { get; set; }
+
+        [Required]
+        [StringLength(8)]
         public string SerialKey { get; set; }
 
         public Participant Participant { get; set; }
