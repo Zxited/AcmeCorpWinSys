@@ -124,3 +124,18 @@ body {
 .text-outline {
   text-shadow: 1px 1px rgba(0, 0, 0, 1), -1px -1px rgba(0, 0, 0, 1), 1px -1px rgba(0, 0, 0, 1), -1px 1px rgba(0, 0, 0, 1);
 }
+
+.text-success-box {
+  background-color: rgba(40, 167, 69, 0.6);
+  border: .2rem solid #28a745;
+  border-radius: 1.2rem;
+  padding: 1.2rem;
+}
+
+.form-control {
+  color: black;
+}
+
+.form-control:focus {
+  color: black;
+}

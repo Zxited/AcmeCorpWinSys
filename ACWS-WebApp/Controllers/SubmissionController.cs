@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ACWS_Data;
+using ACWS_Data.Models;
 using ACWS_Services.ServiceInterfaces;
 
 namespace ACWS_WebApp.Controllers
@@ -25,10 +26,27 @@ namespace ACWS_WebApp.Controllers
             _participantService = participantService;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> MakeSubmission()
+        public IActionResult Index()
         {
             return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> MakeSubmission(Submission submission)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    return Ok();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return NotFound();
         }
     }
 }
