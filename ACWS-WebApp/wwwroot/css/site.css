@@ -2,10 +2,9 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
   text-align: center;
-  word-break: break-all;
   color: #DDD;
+  font-size: 1.4em;
 }
 
 /* Provide sufficient contrast against white background */
@@ -20,7 +19,7 @@ a {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
+  color: #DDD;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
@@ -28,19 +27,12 @@ a {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+  font-size: .875rem;
 }
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 1rem;
   }
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
@@ -61,14 +53,13 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin-bottom: 4rem;
 }
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
 }
 
 /* Remove unnecessary space */
@@ -85,10 +76,44 @@ body {
   color: #DDD;
 }
 
+.bg-star {
+  background-image: url("../img/8-bit-star-bg.png");
+  background-position: center;
+  background-repeat: repeat;
+  text-shadow: 4rem rgba(0, 0, 0, 1);
+}
+
 .text-light-custom {
   color: #DDD;
 }
 
 .text-light-custom:hover {
   color: #b0b0b0;
+}
+
+.prize-pools-section {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.prize-pool {
+  width: 12rem !important;
+  border-radius: 1.5rem;
+  /* border: #DDD .1rem solid; */
+  padding: 1.5rem;
+  box-sizing: content-box;
+}
+
+.prize-image {
+  width: 12rem;
+  height: 12rem;
+  background-image: url("../img/8-bit-explode.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.ent-icon {
+  height: 1rem;
 }
