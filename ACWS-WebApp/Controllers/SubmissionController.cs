@@ -28,7 +28,7 @@ namespace ACWS_WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> MakeSubmission()
         {
-            
+            return Ok();
         }
     }
 }

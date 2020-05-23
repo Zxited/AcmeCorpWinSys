@@ -1,8 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using ACWS_Data.Models
+@model IEnumerable<PrizePool>
+
+@{
+    
+    ViewData["Title"] = "Winner Days!";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="h1">Welcome to<br>Winner Days!</h1>
+    <p>Every serialnumber gives you 2 entries!<br>Please choose which draws you would like to enter below.</p>
+    <p>Entries left: 2</p>
+</div>
+
+<div class="row">
+    @for (int i = 0; i < 10; i++)
+    {
+        <div class="col p-3" style="width: 200px;">
+            <p class="display-8 text-center">PRIZE #@(i+1)</p>
+            <div style="background-color: #AAA; width: 160px; height: 160px;"></div>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+            <div>
+                @for (int j = 0; j < 6; j++)
+                {
+                    <p class="display-12">1 x PRODUCT #@(j+1)</p>
+                }
+            </div>
+            <button class="btn btn-primary w-100">Enter</button>
+        </div>
+    }
 </div>

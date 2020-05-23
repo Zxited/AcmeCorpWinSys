@@ -5,6 +5,7 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+  color: #DDD;
 }
 
 /* Provide sufficient contrast against white background */
@@ -68,4 +69,26 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+/* Remove unnecessary space */
+* {
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+  font-family: monospace;
+}
+
+/* Dark Mode */
+.bg-dark-custom {
+  background-color: #0b132b;
+  color: #DDD;
+}
+
+.text-light-custom {
+  color: #DDD;
+}
+
+.text-light-custom:hover {
+  color: #b0b0b0;
 }
