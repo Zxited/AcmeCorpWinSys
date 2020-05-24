@@ -29,9 +29,6 @@ namespace ACWS_WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-            services.AddScoped<IParticipantService, PariticipantService>();
-
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -43,6 +40,9 @@ namespace ACWS_WebApp
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddMvc();
+            services.AddScoped<IParticipantService, PariticipantService>();
+            services.AddScoped<IPrizePoolService, PrizePoolService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

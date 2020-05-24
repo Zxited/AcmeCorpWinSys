@@ -139,3 +139,7 @@ body {
 .form-control:focus {
   color: black;
 }
+
+.text-small {
+  font-size: 0.6rem;
+}
