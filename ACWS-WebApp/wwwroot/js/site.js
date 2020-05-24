@@ -45,7 +45,12 @@ async function redeemCode() {
     }
 }
 
-function checkSerialNumber(){
+async function useEntry(prize_pool) {
+    prize_pool.innerHTML = "Participating!";
+    prize_pool.className = "btn btn-success w-100";
+}
+
+function checkSerialNumber() {
     var serial_number = document.getElementById('serial_number');
     var snErrorMsg = document.getElementById('snErrorMsg');
 
@@ -57,7 +62,7 @@ function checkSerialNumber(){
     }
 }
 
-function checkFName(){
+function checkFName() {
     var fname = document.getElementById('fname');
     var fnameErrorMsg = document.getElementById('fnameErrorMsg');
 
@@ -69,7 +74,7 @@ function checkFName(){
     }
 }
 
-function checkLName(){
+function checkLName() {
     var lname = document.getElementById('lname');
     var lnameErrorMsg = document.getElementById('lnameErrorMsg');
 
@@ -81,7 +86,7 @@ function checkLName(){
     }
 }
 
-function checkDOB(){
+function checkDOB() {
     var dob = document.getElementById('dob');
     var dobErrorMsg = document.getElementById('dobErrorMsg');
 
@@ -99,7 +104,7 @@ function checkDOB(){
     }
 }
 
-function checkTOS_PP(){
+function checkTOS_PP() {
     var tos_pp = document.getElementById('tos_pp');
     var tos_ppErrorMsg = document.getElementById('tos_ppErrorMsg');
 
