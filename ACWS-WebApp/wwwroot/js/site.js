@@ -8,12 +8,12 @@ async function redeemCode() {
         success_box.style.visibility = 'hidden';
         success_box.style.position = 'absolute';
 
-    const serial_number = document.getElementById('serial_number');
-    const fname = document.getElementById('fname');
-    const lname = document.getElementById('lname');
-    const email = document.getElementById('email');
-    const dob = document.getElementById('dob');
-    const tos_pp = document.getElementById('tos_pp');
+    var serial_number = document.getElementById('serial_number');
+    var fname = document.getElementById('fname');
+    var lname = document.getElementById('lname');
+    var email = document.getElementById('email');
+    var dob = document.getElementById('dob');
+    var tos_pp = document.getElementById('tos_pp');
     
     var tos_pp_bool = false;
     if (tos_pp.value == "on") {
@@ -21,7 +21,7 @@ async function redeemCode() {
     }
 
     const submission = {
-        SerialNumber: serial_number.value,
+        SerialKey: serial_number.value,
         FirstName: fname.value,
         LastName: lname.value,
         Email: email.value,
@@ -39,9 +39,15 @@ async function redeemCode() {
     })
 
     if(response.ok) {
+        serial_number.value = "";
         var success_box = document.getElementById('success_box');
         success_box.style.visibility = 'visible';
         success_box.style.position = 'relative';
+    }
+    else {
+        var failed_box = document.getElementById('failed_box');
+        failed_box.style.visibility = 'visible';
+        failed_box.style.position = 'relative';
     }
 }
 

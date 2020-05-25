@@ -30,17 +30,25 @@ namespace ACWS_Data.Models
                 new SerialNumber
                 {
                     ParticipantID = context.Participants.FirstOrDefault(p => p.Email == "johnny.dough@example.com").ParticipantID,
-                    SerialKey = "ASDFGHJK"
+                    SerialKey = "A1A1A1A1"
                 },
                 new SerialNumber
                 {
                     ParticipantID = context.Participants.FirstOrDefault(p => p.Email == "johnny.dough@example.com").ParticipantID,
-                    SerialKey = "QWERTYUI"
+                    SerialKey = "B2B2B2B2"
                 },
                 new SerialNumber
                 {
                     ParticipantID = context.Participants.FirstOrDefault(p => p.Email == "johnny.dough@example.com").ParticipantID,
-                    SerialKey = "12345678"
+                    SerialKey = "C3C3C3C3"
+                },
+                new SerialNumber
+                {
+                    SerialKey = "D4D4D4D4"
+                },
+                new SerialNumber
+                {
+                    SerialKey = "E5E5E5E5"
                 }
             );
             context.SaveChanges();
@@ -199,17 +207,17 @@ namespace ACWS_Data.Models
                 new PoolEntry
                 {
                     PrizePoolID = context.PrizePools.FirstOrDefault(p => p.PrizePoolName == "RTX Luver").PrizePoolID,
-                    SerialNumberID = context.SerialNumbers.FirstOrDefault(s => s.SerialKey == "ASDFGHJK").SerialNumberID
+                    SerialNumberID = context.SerialNumbers.FirstOrDefault(s => s.SerialKey == "A1A1A1A1").SerialNumberID
                 },
                 new PoolEntry
                 {
                     PrizePoolID = context.PrizePools.FirstOrDefault(p => p.PrizePoolName == "The Biggest and Badest").PrizePoolID,
-                    SerialNumberID = context.SerialNumbers.FirstOrDefault(s => s.SerialKey == "ASDFGHJK").SerialNumberID
+                    SerialNumberID = context.SerialNumbers.FirstOrDefault(s => s.SerialKey == "A1A1A1A1").SerialNumberID
                 },
                 new PoolEntry
                 {
                     PrizePoolID = context.PrizePools.FirstOrDefault(p => p.PrizePoolName == "The Biggest and Badest").PrizePoolID,
-                    SerialNumberID = context.SerialNumbers.FirstOrDefault(s => s.SerialKey == "QWERTYUI").SerialNumberID
+                    SerialNumberID = context.SerialNumbers.FirstOrDefault(s => s.SerialKey == "B2B2B2B2").SerialNumberID
                 }
             );
             context.SaveChanges();
