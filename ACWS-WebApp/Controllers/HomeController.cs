@@ -31,7 +31,7 @@ namespace ACWS_WebApp.Controllers
         {
             try
             {
-                Participant participant = await _participantService.GetParticipant(checkModel.Email, checkModel.SerialNumber);
+                Participant participant = await _participantService.ParticipantAuthentication(checkModel.Email, checkModel.SerialNumber);
                 
                 if (Request.Cookies.ContainsKey("ParticipantID"))
                 {
@@ -42,7 +42,7 @@ namespace ACWS_WebApp.Controllers
                 {
                     Response.Cookies.Append("ParticipantID", participant.ParticipantID.ToString());
                 }
-                //return View(nameof(Index), checkModel);
+                
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)

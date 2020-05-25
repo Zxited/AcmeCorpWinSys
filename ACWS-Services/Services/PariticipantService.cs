@@ -18,11 +18,56 @@ namespace ACWS_Services.Services
             _context = context;
         }
 
-        public async Task<Participant> CreateParticipant(string firstName, string lastName, string email){
-            return new Participant();
+        public async Task<Participant> GetParticipantByID(int participantID)
+        {
+            Participant participant = await _context.Participants
+                .Include(p => p.SerialNumbers)
+                .FirstOrDefaultAsync(p => p.ParticipantID == participantID);
+
+            if (participant != null)
+            {
+                return participant;
+            }
+
+            throw new Exception("Paticipant not found.");
         }
 
-        public async Task<Participant> GetParticipant(string email, string serialNumber)
+        public async Task<Participant> GetParticipantByEmail(string email)
+        {
+            Participant participant = await _context.Participants
+                .Include(p => p.SerialNumbers)
+                .FirstOrDefaultAsync(p => p.Email == email);
+
+            if (participant != null)
+            {
+                return participant;
+            }
+
+            throw new Exception("Paticipant not found.");
+        }
+
+        public async Task<Participant> CreateParticipant(string firstName, string lastName, string email, DateTime dateOfBirth, bool toSPP)
+        {
+            var participant = await GetParticipantByEmail(email);
+            
+            if (participant == null && toSPP)
+            {
+                participant = new Participant
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Email = email,
+                    DateOfBirth = dateOfBirth,
+                    ToSPP = toSPP
+                };
+
+                await _context.SaveChangesAsync();
+            }
+
+            return await GetParticipantByEmail(email);
+        }
+
+        public async Task<Participant> ParticipantAuthentication(string email, string serialNumber)
         {
             Participant participant = await _context.Participants
                 .Include(p => p.SerialNumbers)
@@ -36,7 +81,7 @@ namespace ACWS_Services.Services
             throw new Exception("Paticipant not found.");
         }
 
-        public async Task<int> GetUnusedEntries(int participantID)
+        public async Task<int> GetEntriesLeft(int participantID)
         {
             var participant = await _context.Participants
                 .Include(p => p.SerialNumbers)
@@ -51,6 +96,33 @@ namespace ACWS_Services.Services
             }
 
             return total;
+        }
+
+        public async Task<bool> UseEntry(int prizePoolID, int participantID)
+        {
+            var participant = await _context.Participants
+            .Include(p => p.SerialNumbers)
+                .ThenInclude(s => s.PoolEntries)
+            .FirstOrDefaultAsync(p => p.ParticipantID == participantID);
+
+            foreach (var serialNumber in participant.SerialNumbers)
+            {
+                if(serialNumber.PoolEntries.Count() < 2)
+                {
+                    PoolEntry poolEntry = new PoolEntry
+                    {
+                        PrizePoolID = prizePoolID,
+                        SerialNumberID = serialNumber.SerialNumberID
+                    };
+
+                    await _context.PoolEntries.AddAsync(poolEntry);
+                    await _context.SaveChangesAsync();
+
+                    return true;
+                }
+            }
+
+            throw new Exception("No entries left.");
         }
     }
 }

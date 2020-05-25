@@ -30,9 +30,6 @@ namespace ACWS_Data
             builder.Entity<PoolEntry>().ToTable("PoolEntry");
             builder.Entity<Prize>().ToTable("Prize");
 
-            builder.Entity<PoolEntry>()
-                .HasKey(c => new {c.PrizePoolID, c.SerialNumberID});
-
             builder.Entity<Prize>()
                 .HasKey(c => new {c.PrizePoolID, c.ProductID});
 

@@ -6,7 +6,7 @@ namespace ACWS_Data.Models
     public class SerialNumber
     {
         public int SerialNumberID { get; set; }
-        public int ParticipantID { get; set; }
+        public int? ParticipantID { get; set; }
 
         [Required]
         [StringLength(8)]

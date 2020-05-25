@@ -45,23 +45,24 @@ async function redeemCode() {
     }
 }
 
-function getParticipantID() {
+function getCookieFieldValue(keyName) {
     var decodedCookie = decodeURIComponent(document.cookie);
     var cookieArray = decodedCookie.split(';');
-    var participantID = 0;
 
+    var result;
     cookieArray.forEach(cookie => {
         var kv = cookie.split('=');
-        if (kv[0] == "ParticipantID") {
-            participantID = kv[1];
+        if (kv[0] == keyName) {
+            console.warn(kv[1]);
+            result = kv[1];
         }
     });
 
-    return participantID;
+    return result;
 }
 
 async function getEntries(prizePoolID) {
-    var participantID = getParticipantID();
+    var participantID = getCookieFieldValue("ParticipantID");
 
     if (participantID > 0) {
 
@@ -81,25 +82,78 @@ async function getEntries(prizePoolID) {
         })
 
         if (response.ok) {
-            var entries = document.getElementById(("entries" + prizePoolID));
-            entries.innerText = await response.text();
+            return await response.text();
         }
     }
+}
 
-    
+async function getEntriesLeft() {
+    var participantID = getCookieFieldValue("ParticipantID");
+
+    if (participantID > 0) {
+
+        const entriesRequest = {
+            ParticipantID: participantID
+        }
+
+        var new_uri = uri + "/entriesleft";
+        let response = await fetch(new_uri, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(entriesRequest)
+        })
+
+        if (response.ok) {
+            return await response.text();
+        }
+    }
 }
 
 async function useEntry(prize_pool) {
-    prize_pool.className = "btn btn-success w-100";
-    prize_pool.innerHTML = "Added Entry!";
-    getEntries(prize_pool.id);
-    
-    
-    setTimeout(function() {
-        prize_pool.className = "btn btn-primary w-100";
-        prize_pool.innerHTML = '1 x <img src="../img/coin-icon-selfmade.png" class="ent-icon">';
-        
-    }, 500);
+    var participantID = getCookieFieldValue("ParticipantID");
+    var prizePoolID = prize_pool.id;
+
+    const entriesRequest = {
+        PrizePoolID: prizePoolID,
+        ParticipantID: participantID
+    }
+
+    var new_uri = uri + "/useentry";
+    let response = await fetch(new_uri, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(entriesRequest)
+    })
+
+    if (response.ok) {
+        prize_pool.className = "btn btn-success w-100";
+        prize_pool.innerHTML = "Added Entry!";
+
+        var entries = document.getElementById(("entries" + prizePoolID));
+        entries.innerHTML = await getEntries(prize_pool.id);
+
+        var entriesLeft = await getEntriesLeft();
+        document.getElementById("entriesLeft").innerHTML = entriesLeft;
+
+        if (entriesLeft < 1) {
+            prize_pool.setAttribute("href", "/Home/Check");
+            prize_pool.className = "btn btn-primary w-100";
+            prize_pool.innerHTML = 'Redeem codes to enter';
+        }
+        else {
+            setTimeout(function() {
+                prize_pool.className = "btn btn-primary w-100";
+                prize_pool.innerHTML = '1 x <img src="../img/coin-icon-selfmade.png" class="ent-icon">';
+                
+            }, 500);
+        }
+    }
 }
 
 function checkSerialNumber() {

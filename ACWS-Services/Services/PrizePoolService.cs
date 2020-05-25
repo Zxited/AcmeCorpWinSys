@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,9 +21,11 @@ namespace ACWS_Services.Services
 
         public async Task<PrizePool> GetPrizePoolByID(int prizePoolID)
          {
-             return await _context.PrizePools
+             PrizePool prizePool = await _context.PrizePools
                 .Include(p => p.PoolEntries)
                 .FirstOrDefaultAsync(p => p.PrizePoolID == prizePoolID);
+
+             return prizePool == null ? throw new Exception("Prize pool could not be found.") : prizePool;
          }
         
          public async Task<IEnumerable<PrizePool>> GetPrizePools()
@@ -47,8 +50,8 @@ namespace ACWS_Services.Services
             {
                 result += serialNumber.PoolEntries.Count(p => p.PrizePoolID == prizePoolID);
             }
-
-             return result;
+            
+            return result;
          }
     }
 }

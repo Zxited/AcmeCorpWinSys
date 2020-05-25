@@ -98,10 +98,17 @@ body {
 
 .prize-pool {
   flex: 1;
-  min-width: 12rem;
-  max-width: 18rem;
+  min-width: 16rem;
+  max-width: 20rem;
   margin: 2rem;
   box-sizing: content-box;
+}
+
+@media (min-width: 768px) {
+  .prize-pool {
+    min-width: 16rem;
+    max-width: 16rem;
+  }
 }
 
 .prize-image {

@@ -2,6 +2,7 @@ namespace ACWS_Data.Models
 {
     public class PoolEntry
     {
+        public int PoolEntryID { get; set; }
         public int PrizePoolID { get; set; }
         public int SerialNumberID { get; set; }
 

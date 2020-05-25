@@ -208,7 +208,7 @@ namespace ACWS_Data.Models
                 },
                 new PoolEntry
                 {
-                    PrizePoolID = context.PrizePools.FirstOrDefault(p => p.PrizePoolName == "Big But Speedy").PrizePoolID,
+                    PrizePoolID = context.PrizePools.FirstOrDefault(p => p.PrizePoolName == "The Biggest and Badest").PrizePoolID,
                     SerialNumberID = context.SerialNumbers.FirstOrDefault(s => s.SerialKey == "QWERTYUI").SerialNumberID
                 }
             );

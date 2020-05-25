@@ -43,6 +43,7 @@ namespace ACWS_WebApp
             services.AddMvc();
             services.AddScoped<IParticipantService, PariticipantService>();
             services.AddScoped<IPrizePoolService, PrizePoolService>();
+            services.AddScoped<ISerialNumberService, SerialNumberService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

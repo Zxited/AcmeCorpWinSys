@@ -13,7 +13,7 @@
     <p>Every serialnumber gives you 2 entries!<br>Please choose which draws you would like to enter below.</p>
     @if (Context.Request.Cookies.ContainsKey("ParticipantID"))
     {
-        <p>Entries left: @await participantService.GetUnusedEntries(int.Parse(Context.Request.Cookies["ParticipantID"])) x <img class="ent-icon" src="../img/coin-icon-selfmade.png"></p>
+        <p>Entries left: <span id="entriesLeft">@await participantService.GetEntriesLeft(int.Parse(Context.Request.Cookies["ParticipantID"]))</span> x <img class="ent-icon" src="../img/coin-icon-selfmade.png"></p>
     }
 </div>
 
@@ -36,9 +36,9 @@
             {
                 <p class="text-small">Your entries: <span id='@("entries" + prizePool.PrizePoolID)'>@await prizePoolService.GetParticipantEntriesInPool(prizePool.PrizePoolID, int.Parse(Context.Request.Cookies["ParticipantID"]))</span></p>
 
-                @if (await participantService.GetUnusedEntries(int.Parse(Context.Request.Cookies["ParticipantID"])) > 0)
+                @if (await participantService.GetEntriesLeft(int.Parse(Context.Request.Cookies["ParticipantID"])) > 0)
                 {
-                    <button id=@prizePool.PrizePoolID onclick="useEntry(this);" class="btn btn-primary w-100">1 x <img src="../img/coin-icon-selfmade.png" class="ent-icon"></button>
+                    <a id=@prizePool.PrizePoolID onclick="useEntry(this);" class="btn btn-primary w-100">1 x <img src="../img/coin-icon-selfmade.png" class="ent-icon"></a>
                 }
                 else
                 {
