@@ -53,5 +53,15 @@ namespace ACWS_Services.Services
             
             return result;
          }
+
+         public async Task<IEnumerable<PrizePool>> GetAllPrizePoolWithParticipants()
+         {
+             return await _context.PrizePools
+                .Include(p => p.PoolEntries)
+                    .ThenInclude(p => p.SerialNumber)
+                        .ThenInclude(s => s.Participant)
+                .AsNoTracking()
+                .ToListAsync();
+         }
     }
 }

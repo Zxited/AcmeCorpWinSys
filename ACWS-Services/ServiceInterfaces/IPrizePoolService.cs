@@ -10,5 +10,6 @@ namespace ACWS_Services.ServiceInterfaces
         Task<PrizePool> GetPrizePoolByID(int prizePoolID);
          Task<IEnumerable<PrizePool>> GetPrizePools();
          Task<int> GetParticipantEntriesInPool(int prizePoolID, int participantID);
+         Task<IEnumerable<PrizePool>> GetAllPrizePoolWithParticipants();
     }
 }
