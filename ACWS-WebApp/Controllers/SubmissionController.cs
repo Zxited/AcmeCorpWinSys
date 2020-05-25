@@ -16,14 +16,17 @@ namespace ACWS_WebApp.Controllers
     {
         private readonly ILogger<SubmissionController> _logger;
         private readonly IParticipantService _participantService;
+        private readonly IPrizePoolService _prizePoolService;
 
         public SubmissionController(
             ILogger<SubmissionController> logger,
-            IParticipantService participantService
+            IParticipantService participantService,
+            IPrizePoolService prizePoolService
         )
         {
             _logger = logger;
             _participantService = participantService;
+            _prizePoolService = prizePoolService;
         }
 
         public IActionResult Index()
@@ -39,6 +42,26 @@ namespace ACWS_WebApp.Controllers
                 if (ModelState.IsValid)
                 {
                     return Ok();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost("getentries")]
+        public async Task<IActionResult> GetEntries([Bind("PrizePoolID,ParticipantID")]EntriesRequestModel entriesRequest)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    int.TryParse(entriesRequest.PrizePoolID, out int PrID);
+                    int.TryParse(entriesRequest.ParticipantID, out int PaID);
+                    return Ok(await _prizePoolService.GetParticipantEntriesInPool(PrID, PaID));
                 }
             }
             catch (Exception ex)

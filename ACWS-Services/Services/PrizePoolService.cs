@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -16,6 +17,13 @@ namespace ACWS_Services.Services
         {
             _context = context;
         }
+
+        public async Task<PrizePool> GetPrizePoolByID(int prizePoolID)
+         {
+             return await _context.PrizePools
+                .Include(p => p.PoolEntries)
+                .FirstOrDefaultAsync(p => p.PrizePoolID == prizePoolID);
+         }
         
          public async Task<IEnumerable<PrizePool>> GetPrizePools()
          {
@@ -23,6 +31,24 @@ namespace ACWS_Services.Services
              .Include(p => p.Prizes)
                 .ThenInclude(p => p.Product)
              .ToListAsync();
+         }
+
+         public async Task<int> GetParticipantEntriesInPool(int prizePoolID, int participantID)
+         {
+             var prizePool = await GetPrizePoolByID(prizePoolID);
+
+             var serialNumbers = await _context.SerialNumbers
+                .Include(s => s.PoolEntries)
+                .Where(s => s.ParticipantID == participantID)
+                .ToListAsync();
+
+            int result = 0;
+            foreach (var serialNumber in serialNumbers)
+            {
+                result += serialNumber.PoolEntries.Count(p => p.PrizePoolID == prizePoolID);
+            }
+
+             return result;
          }
     }
 }

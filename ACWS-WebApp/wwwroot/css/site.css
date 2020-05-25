@@ -99,6 +99,7 @@ body {
 .prize-pool {
   flex: 1;
   min-width: 12rem;
+  max-width: 18rem;
   margin: 2rem;
   box-sizing: content-box;
 }
@@ -141,5 +142,9 @@ body {
 }
 
 .text-small {
-  font-size: 0.6rem;
+  font-size: 0.8rem;
+}
+
+.included-products {
+  height: 16rem;
 }

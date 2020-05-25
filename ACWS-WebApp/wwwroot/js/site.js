@@ -45,9 +45,61 @@ async function redeemCode() {
     }
 }
 
+function getParticipantID() {
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var cookieArray = decodedCookie.split(';');
+    var participantID = 0;
+
+    cookieArray.forEach(cookie => {
+        var kv = cookie.split('=');
+        if (kv[0] == "ParticipantID") {
+            participantID = kv[1];
+        }
+    });
+
+    return participantID;
+}
+
+async function getEntries(prizePoolID) {
+    var participantID = getParticipantID();
+
+    if (participantID > 0) {
+
+        const entriesRequest = {
+            PrizePoolID: prizePoolID,
+            ParticipantID: participantID
+        }
+
+        var new_uri = uri + "/getentries";
+        let response = await fetch(new_uri, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(entriesRequest)
+        })
+
+        if (response.ok) {
+            var entries = document.getElementById(("entries" + prizePoolID));
+            entries.innerText = await response.text();
+        }
+    }
+
+    
+}
+
 async function useEntry(prize_pool) {
-    prize_pool.innerHTML = "Participating!";
     prize_pool.className = "btn btn-success w-100";
+    prize_pool.innerHTML = "Added Entry!";
+    getEntries(prize_pool.id);
+    
+    
+    setTimeout(function() {
+        prize_pool.className = "btn btn-primary w-100";
+        prize_pool.innerHTML = '1 x <img src="../img/coin-icon-selfmade.png" class="ent-icon">';
+        
+    }, 500);
 }
 
 function checkSerialNumber() {

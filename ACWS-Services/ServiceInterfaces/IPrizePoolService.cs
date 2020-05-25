@@ -7,6 +7,8 @@ namespace ACWS_Services.ServiceInterfaces
 {
     public interface IPrizePoolService
     {
+        Task<PrizePool> GetPrizePoolByID(int prizePoolID);
          Task<IEnumerable<PrizePool>> GetPrizePools();
+         Task<int> GetParticipantEntriesInPool(int prizePoolID, int participantID);
     }
 }

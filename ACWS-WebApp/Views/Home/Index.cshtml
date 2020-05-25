@@ -1,18 +1,20 @@
 ﻿@using System.Threading.Tasks
 @using ACWS_Services.ServiceInterfaces
 @using ACWS_Data.Models
-@model Participant
 @inject IPrizePoolService prizePoolService
+@inject IParticipantService participantService
 
 @{
-    
     ViewData["Title"] = "Winner Days!";
 }
 
 <div class="text-center">
     <h1 class="h1">Welcome to<br>Winner Days!</h1>
     <p>Every serialnumber gives you 2 entries!<br>Please choose which draws you would like to enter below.</p>
-    <p>Entries left: 2 x <img class="ent-icon" src="../img/coin-icon-selfmade.png"></p>
+    @if (Context.Request.Cookies.ContainsKey("ParticipantID"))
+    {
+        <p>Entries left: @await participantService.GetUnusedEntries(int.Parse(Context.Request.Cookies["ParticipantID"])) x <img class="ent-icon" src="../img/coin-icon-selfmade.png"></p>
+    }
 </div>
 
 <div class="prize-pools-section">
@@ -22,17 +24,33 @@
             <p class="text-center m-0">@prizePool.PrizePoolName</p>
             <p class="text-small text-center">Total: @prizePool.PrizePoolQuantity</p>
             <div class="prize-image">@prizePool.PrizePoolImage</div>
-            <p>@prizePool.PrizePoolDescription</p>
-            <div>
+            <div class="included-products">
+                <p>@prizePool.PrizePoolDescription</p>
+
                 @foreach (var prize in prizePool.Prizes)
                 {
                     <p>@prize.ProductQuantity x @prize.Product.ProductName</p>
                 }
             </div>
-            @if (prizePoolService.)
+            @if (Context.Request.Cookies.ContainsKey("ParticipantID"))
             {
-            <button id=@("prizePoolID" + prizePool.PrizePoolID) onclick="useEntry(this);" class="btn btn-primary w-100">1 x <img src="../img/coin-icon-selfmade.png" class="ent-icon"></button>
+                <p class="text-small">Your entries: <span id='@("entries" + prizePool.PrizePoolID)'>@await prizePoolService.GetParticipantEntriesInPool(prizePool.PrizePoolID, int.Parse(Context.Request.Cookies["ParticipantID"]))</span></p>
+
+                @if (await participantService.GetUnusedEntries(int.Parse(Context.Request.Cookies["ParticipantID"])) > 0)
+                {
+                    <button id=@prizePool.PrizePoolID onclick="useEntry(this);" class="btn btn-primary w-100">1 x <img src="../img/coin-icon-selfmade.png" class="ent-icon"></button>
+                }
+                else
+                {
+                    <a asp-action="Check" class="btn btn-primary w-100">Redeem codes to enter</a>
+                }
             }
+            else
+            {
+                <p class="text-small">Your entries: <span id='@("entries" + prizePool.PrizePoolID)'>0</span></p>
+                <a asp-action="Check" class="btn btn-primary w-100">Redeem codes to enter</a>
+            }
+            
         </div>
     }
 </div>
