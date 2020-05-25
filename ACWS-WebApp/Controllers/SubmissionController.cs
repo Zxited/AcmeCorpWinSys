@@ -48,6 +48,16 @@ namespace ACWS_WebApp.Controllers
                     {
                         Participant participant = await _participantService.CreateParticipant(submission.FirstName, submission.LastName, submission.Email, submission.DateOfBirth, submission.ToSPP);
                         SerialNumber serialNumber = await _serialNumberService.SubmitSerialNumber(submission.SerialKey, participant.ParticipantID);
+
+                        if (!Request.Cookies.ContainsKey("ParticipantID"))
+                        {
+                            Response.Cookies.Append("ParticipantID", participant.ParticipantID.ToString());
+                            Response.Cookies.Append("FirstName", participant.FirstName.ToString());
+                            Response.Cookies.Append("LastName", participant.LastName.ToString());
+                            Response.Cookies.Append("Email", participant.Email.ToString());
+                            Response.Cookies.Append("DateOfBirth", participant.DateOfBirth.ToString("yyyy-MM-dd"));
+                        }
+                        
                         return Ok();
                     }
                 }

@@ -42,13 +42,13 @@
                 }
                 else
                 {
-                    <a asp-action="Check" class="btn btn-primary w-100">Redeem codes to enter</a>
+                    <a asp-action="Redeem" class="btn btn-primary w-100">Redeem codes to enter</a>
                 }
             }
             else
             {
                 <p class="text-small">Your entries: <span id='@("entries" + prizePool.PrizePoolID)'>0</span></p>
-                <a asp-action="Check" class="btn btn-primary w-100">Redeem codes to enter</a>
+                <a asp-action="Redeem" class="btn btn-primary w-100">Redeem codes to enter</a>
             }
             
         </div>

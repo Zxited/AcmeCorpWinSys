@@ -48,20 +48,26 @@ namespace ACWS_Services.Services
 
         public async Task<Participant> CreateParticipant(string firstName, string lastName, string email, DateTime dateOfBirth, bool toSPP)
         {
-            var participant = await GetParticipantByEmail(email);
-            
-            if (participant == null && toSPP)
+            try
             {
-                participant = new Participant
+                var participant = await GetParticipantByEmail(email);
+            }
+            catch (Exception)
+            {
+                if (toSPP)
                 {
-                    FirstName = firstName,
-                    LastName = lastName,
-                    Email = email,
-                    DateOfBirth = dateOfBirth,
-                    ToSPP = toSPP
-                };
+                    var participant = new Participant
+                    {
+                        FirstName = firstName,
+                        LastName = lastName,
+                        Email = email,
+                        DateOfBirth = dateOfBirth,
+                        ToSPP = toSPP
+                    };
 
-                await _context.SaveChangesAsync();
+                    await _context.AddAsync(participant);
+                    await _context.SaveChangesAsync();
+                }
             }
 
             return await GetParticipantByEmail(email);

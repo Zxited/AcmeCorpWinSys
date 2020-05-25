@@ -5,8 +5,12 @@ const uri = "/api/submission"
 
 async function redeemCode() {
     var success_box = document.getElementById('success_box');
-        success_box.style.visibility = 'hidden';
-        success_box.style.position = 'absolute';
+    success_box.style.visibility = 'hidden';
+    success_box.style.position = 'absolute';
+    
+    var failed_box = document.getElementById('failed_box');
+    failed_box.style.visibility = 'hidden';
+    failed_box.style.position = 'absolute';
 
     var serial_number = document.getElementById('serial_number');
     var fname = document.getElementById('fname');
@@ -40,12 +44,10 @@ async function redeemCode() {
 
     if(response.ok) {
         serial_number.value = "";
-        var success_box = document.getElementById('success_box');
         success_box.style.visibility = 'visible';
         success_box.style.position = 'relative';
     }
     else {
-        var failed_box = document.getElementById('failed_box');
         failed_box.style.visibility = 'visible';
         failed_box.style.position = 'relative';
     }
@@ -148,7 +150,7 @@ async function useEntry(prize_pool) {
         document.getElementById("entriesLeft").innerHTML = entriesLeft;
 
         if (entriesLeft < 1) {
-            prize_pool.setAttribute("href", "/Home/Check");
+            prize_pool.setAttribute("href", "/Home/Redeem");
             prize_pool.className = "btn btn-primary w-100";
             prize_pool.innerHTML = 'Redeem codes to enter';
         }
