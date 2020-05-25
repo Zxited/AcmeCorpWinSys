@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Web;
+using System.Net;
 using System.Data.Common;
 using System;
 using System.Collections.Generic;
@@ -32,15 +33,13 @@ namespace ACWS_WebApp.Controllers
             try
             {
                 Participant participant = await _participantService.ParticipantAuthentication(checkModel.Email, checkModel.SerialNumber);
-                
-                if (Request.Cookies.ContainsKey("ParticipantID"))
-                {
-                    Response.Cookies.Delete("ParticipantID");
-                    Response.Cookies.Append("ParticipantID", participant.ParticipantID.ToString());
-                }
-                else
+                if (!Request.Cookies.ContainsKey("ParticipantID"))
                 {
                     Response.Cookies.Append("ParticipantID", participant.ParticipantID.ToString());
+                    Response.Cookies.Append("FirstName", participant.FirstName.ToString());
+                    Response.Cookies.Append("LastName", participant.LastName.ToString());
+                    Response.Cookies.Append("Email", participant.Email.ToString());
+                    Response.Cookies.Append("DateOfBirth", participant.DateOfBirth.ToString("yyyy-MM-dd"));
                 }
                 
                 return RedirectToAction(nameof(Index));

@@ -25,25 +25,25 @@
 
             <div class="form-group">
                 <label for="fname">First name</label>
-                <input id="fname" name="fname" maxlength="64" autocomplete="given-name" oninput="checkFName();" type="text" placeholder="John" class="form-control" required />
+                <input id="fname" name="fname" maxlength="64" autocomplete="given-name" oninput="checkFName();" type="text" placeholder="John" class="form-control" value=@Context.Request.Cookies["FirstName"] required />
                 <span id="fnameErrorMsg" style="visibility: hidden;" class="text-danger">First name must only contain letters.</span>
             </div>
 
             <div class="form-group">
                 <label for="lname">Last name</label>
-                <input id="lname" name="lname" maxlength="64" autocomplete="family-name" oninput="checkLName();" type="text" placeholder="Doe" class="form-control" required />
+                <input id="lname" name="lname" maxlength="64" autocomplete="family-name" oninput="checkLName();" type="text" placeholder="Doe" class="form-control" value=@Context.Request.Cookies["LastName"] required />
                 <span id="lnameErrorMsg" style="visibility: hidden;" class="text-danger">Last name must only contain letters.</span>
             </div>
             
             <div class="form-group">
                 <label for="email">Email</label>
-                <input id="email" name="email" autocomplete="email" type="email" placeholder="example@example.example" class="form-control" required />
+                <input id="email" name="email" autocomplete="email" type="email" placeholder="example@example.example" class="form-control" value=@Context.Request.Cookies["Email"] required />
                 <span id="emailErrorMsg" style="visibility: hidden;" class="text-danger">Email must be valid.</span>
             </div>
 
             <div class="form-group">
                 <label for="dob">Date of Birth</label>
-                <input id="dob" name="dob" autocomplete="bday" oninput="checkDOB();" type="date" class="form-control" required />
+                <input id="dob" name="dob" autocomplete="bday" oninput="checkDOB();" type="date" class="form-control"  value=@Context.Request.Cookies["DateOfBirth"] required />
                 <span id="dobErrorMsg" style="visibility: hidden;" class="text-danger">You must be at least 18 years old to participate.</span>
             </div>
 
