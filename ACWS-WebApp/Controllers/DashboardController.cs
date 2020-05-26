@@ -28,9 +28,14 @@ namespace ACWS_WebApp.Controllers
             _prizePoolService = prizePoolService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
-            return View(await _prizePoolService.GetAllPrizePoolWithParticipants());
+            var prizePools = await _prizePoolService.GetAllPrizePoolWithParticipants();
+
+            int pageSize = 10;
+            var resultList = GenericPagedList<PrizePool>.CreateListAsync(prizePools, pageNumber ?? 1, pageSize);
+            
+            return View(resultList);
         }
     }
 }
