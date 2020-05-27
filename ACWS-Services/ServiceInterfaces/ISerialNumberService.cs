@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ACWS_Data.Models;
 
@@ -9,5 +10,6 @@ namespace ACWS_Services.ServiceInterfaces
         Task<bool> SerialNumberUnused(string serialKey);
         Task<SerialNumber> GetSerialNumber(string serialKey);
         Task<SerialNumber> SubmitSerialNumber(string serialKey, int participantID);
+        List<string> GenerateSerialKeys(int keyQuantity, int keyLength);
     }
 }

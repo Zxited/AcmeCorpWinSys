@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ACWS_Data;
 using ACWS_Data.Models;
+using ACWS_Services.ServiceInterfaces;
 
 namespace ACWS_WebApp
 {
@@ -27,6 +28,9 @@ namespace ACWS_WebApp
                 try
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
+                    var serialNumberService = services.GetRequiredService<ISerialNumberService>();
+                    List<string> serialKeys = serialNumberService.GenerateSerialKeys(100, 8);
+
                     context.Database.Migrate();
                     SeedData.Initialize(context);
                 }

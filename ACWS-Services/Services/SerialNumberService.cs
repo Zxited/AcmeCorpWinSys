@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -48,6 +49,33 @@ namespace ACWS_Services.Services
             }
 
             throw new Exception("Serial number is already claimed.");
+        }
+
+        public static List<string> GenerateSerialKeys(int keyQuantity, int keyLength)
+        {
+            List<string> keys = new List<string>();
+
+            for (int i = 0; i < keyQuantity; i++)
+            {
+                keys.Append(KeyGenerator(keyLength));
+            }
+
+            return keys;
+        }
+
+        // Do not use for security, use RNGCryptoServiceProvider instead.
+        private static string KeyGenerator(int keyLength)
+        {
+            var rnd = new Random();
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var charArr = new char[keyLength];
+
+            string serialKey = "";
+            for (int j = 0; j < charArr.Length; j++)
+            {
+                serialKey += chars[rnd.Next(chars.Length)];
+            }
+            return serialKey;
         }
     }
 }
