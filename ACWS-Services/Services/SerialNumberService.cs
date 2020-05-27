@@ -1,5 +1,7 @@
+using System.Reflection;
 using System.Collections.Generic;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -51,13 +53,25 @@ namespace ACWS_Services.Services
             throw new Exception("Serial number is already claimed.");
         }
 
-        public static List<string> GenerateSerialKeys(int keyQuantity, int keyLength)
+        public static List<string> GenerateSerialKeys(int keyQuantity, int keyLength, string[] reservedKeys, bool writeToFile = false)
         {
             List<string> keys = new List<string>();
 
             for (int i = 0; i < keyQuantity; i++)
             {
-                keys.Append(KeyGenerator(keyLength));
+                string key = KeyGenerator(keyLength);
+                if (!reservedKeys.Contains(key))
+                {
+                    keys.Append(key);
+                }
+            }
+
+            if (writeToFile)
+            {
+                string path = Environment.CurrentDirectory;
+                //string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                string fileName =  DateTime.Now.ToShortTimeString() + "-testkeys.txt";
+                File.WriteAllLines(path, keys);
             }
 
             return keys;
@@ -75,6 +89,7 @@ namespace ACWS_Services.Services
             {
                 serialKey += chars[rnd.Next(chars.Length)];
             }
+
             return serialKey;
         }
     }
