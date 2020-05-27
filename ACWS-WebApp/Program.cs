@@ -10,9 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ACWS_Data;
-using ACWS_Data.Models;
 using ACWS_Services;
-using ACWS_Services.ServiceInterfaces;
 
 namespace ACWS_WebApp
 {
