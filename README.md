@@ -8,7 +8,7 @@ Acme Corporation's Winning System for drawing prizes to our lovely customers! (P
 - Run dotnet ef database update with ACWS-WebApp as the startup project and ACWS-Data as the target project to make sure the database is setup.
 - Run the ACWS-WebApp project with dotnet run.
 
-If on linux and a local MSSQL server is preferred check: https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup?view=sql-server-ver15#platforms
+***NOTE:*** If on linux and a local MSSQL server is preferred check: https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup?view=sql-server-ver15#platforms
 
 Todo:
 - Unit tests.
