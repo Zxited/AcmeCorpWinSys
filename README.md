@@ -10,5 +10,5 @@ Acme Corporation's Winning System for drawing prizes to our lovely customers! (P
 
 Todo:
 - Unit tests.
-- Change to a hashed value for participants id's stored in cookies.
+- Change to hashed values for participants id's stored in cookies.
 - Cleanup.
