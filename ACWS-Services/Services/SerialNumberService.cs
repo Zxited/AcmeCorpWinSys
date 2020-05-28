@@ -62,14 +62,17 @@ namespace ACWS_Services.Services
                 string key = KeyGenerator(keyLength);
                 if (!reservedKeys.Contains(key))
                 {
-                    keys.Append(key);
+                    System.Console.WriteLine(key);
+                    keys.Add(key);
                 }
             }
+
+            // Temporary: Change to ILogger or delete if unnecessary
+            System.Console.WriteLine("Keys generated: " + keys.Count().ToString());
 
             if (writeToFile)
             {
                 string path = Environment.CurrentDirectory;
-                //string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
                 string fileName =  DateTime.Now.ToShortTimeString() + "-testkeys.txt";
                 File.WriteAllLines(path, keys);
             }

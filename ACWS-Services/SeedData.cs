@@ -58,7 +58,7 @@ namespace ACWS_Services
                     }
                 );
 
-                foreach (var serialKey in SerialNumberService.GenerateSerialKeys(100, 8, reservedKeys, true))
+                foreach (var serialKey in SerialNumberService.GenerateSerialKeys(100, 8, reservedKeys))
                 {
                     context.Add(new SerialNumber{ SerialKey = serialKey });
                 }
